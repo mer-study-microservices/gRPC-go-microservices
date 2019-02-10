@@ -1,0 +1,243 @@
+{
+  "title": "3 - [Hands-On] gRPC Project Overview & Setup",
+  "cells": [
+    {
+      "type": "text",
+      "data": "<h3>Go Dependencies Setup</h3>"
+    },
+    {
+      "type": "code",
+      "language": "sh",
+      "data": "$ go get -u google.golang.org/grpc"
+    },
+    {
+      "type": "code",
+      "language": "sh",
+      "data": "$ go get -u github.com/golang/protobuf/protoc-gen-go"
+    },
+    {
+      "type": "text",
+      "data": "<h3>Code Generation Test</h3>"
+    },
+    {
+      "type": "text",
+      "data": "/src/calculator<div>/src/greet</div>"
+    },
+    {
+      "type": "text",
+      "data": "src/greet/greetpb/greet.proto"
+    },
+    {
+      "type": "code",
+      "language": "protobuf",
+      "data": "syntax = \"proto3\";\n\npackage greet;\noption go_package = \"greetpb\";\n\nservice GreetService {}"
+    },
+    {
+      "type": "text",
+      "data": "/src/generate.sh"
+    },
+    {
+      "type": "code",
+      "language": "sh",
+      "data": "$ protoc greet/greetpb/greet.proto --go_out=plugins=grpc:."
+    },
+    {
+      "type": "text",
+      "data": "<h3>Server Setup Boilerplate Code</h3>"
+    },
+    {
+      "type": "text",
+      "data": "<b>gRPC Server Setup</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>Let’s setup a gRPC Server with no service on it</li><li>We’ll see how to properly start &amp; stop the Server on a defined <font color=\"#0096ff\">port</font>&nbsp;</li><li><u>The point of this lecture is just to be done with “boilerplate code\"</u></li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "/src/greet/greet_server/server.go"
+    },
+    {
+      "type": "code",
+      "language": "golang",
+      "data": "package main\n\nimport (\n\t\"fmt\"\n\t\"log\"\n\t\"net\"\n\n\t\"github.com/gRPC-go-microservices/src/greet/greetpb\"\n\t\"google.golang.org/grpc\"\n)\n\ntype server struct{}\n\nfunc main() {\n\tfmt.Println(\"Hello world!\")\n\n\t// listener\n\t// 50051 is the default port number for gRPC\n\tlis, err := net.Listen(\"tcp\", \"0.0.0.0:50051\")\n\tif err != nil {\n\t\tlog.Fatalf(\"Failed to listen: %v\", err)\n\t}\n\n\t// create grpc server\n\ts := grpc.NewServer()\n\tgreetpb.RegisterGreetServiceServer(s, &server{})\n\n\t// bind the server to the port\n\tif err := s.Serve(lis); err != nil {\n\t\tlog.Fatalf(\"failed to serve: %v\", err)\n\t}\n}"
+    },
+    {
+      "type": "text",
+      "data": "<h3>Client Setup Boilerplate Code</h3>"
+    },
+    {
+      "type": "text",
+      "data": "<b>gRPC Client Setup</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>Let’s setup a gRPC Client that connects to our Server&nbsp;</li><li>We’ll see how to properly start &amp; stop the Client&nbsp;</li><li><u>The point of this lecture is just to be done with “boilerplate code\"</u></li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "/src/greet/greet/greet_client/client.go"
+    },
+    {
+      "type": "code",
+      "language": "golang",
+      "data": "package main\n\nimport (\n\t\"fmt\"\n\t\"log\"\n\n\t\"github.com/gRPC-go-microservices/src/greet/greetpb\"\n\t\"google.golang.org/grpc\"\n)\n\nfunc main() {\n\tfmt.Println(\"Hello I'm a client\")\n\n\t// by default gRPC has SSL, for now, without this\n\tconn, err := grpc.Dial(\"localhost:500051\", grpc.WithInsecure())\n\tif err != nil {\n\t\tlog.Fatalf(\"could not connect: %v\", err)\n\t}\n\n\t// defer means defer this statement at the very end of this function\n\tdefer conn.Close()\n\n\t// create a new client\n\tc := greetpb.NewGreetServiceClient(conn)\n\tfmt.Printf(\"Created client: %f\", c)\n}"
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

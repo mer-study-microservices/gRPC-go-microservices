@@ -1,0 +1,321 @@
+{
+  "title": "1 - gRPC Course Overview ",
+  "cells": [
+    {
+      "type": "text",
+      "data": "<h3>gRPC Introduction&nbsp;</h3>"
+    },
+    {
+      "type": "text",
+      "data": "<b>Today’s trend is to build microservices&nbsp;</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>Microservices are built in different language nad encompass a function of your business:&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<img src=\"quiver-image-url/C794B7363B21CFD33E975D234BEAEFB8.png\" alt=\"Screen Shot 2019-02-04 at 16.18.37.png\" width=\"425\" height=\"254\">"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>These microservices must exchange information and need to agree on:&nbsp;</li><ul><li>The API to exchange data&nbsp;</li><li>The data format&nbsp;</li><li>The error patterns&nbsp;</li><li>Load Balancing&nbsp;</li><li>Many other</li></ul><li>One of the popular choice for building API is REST (HTTP-JSON)</li><li>In this course, we’ll explore gRPC!</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<b>Building an API is hard</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>Need to think about data model&nbsp;</li><ul><li>JSON</li><li>XML</li><li>Something Binary?&nbsp;</li></ul><li>Need to think about the endpoint&nbsp;</li><ul><li>GET /api/v1/user/123/post/456</li><li>POST /api/v1/user/123/post</li></ul><li>Need to think about how to invoke it and handle errors&nbsp;</li><ul><li>API&nbsp;</li><li>Error</li></ul><li>Need to thihnk about efficiency of the API</li><ul><li>How much data do I get out of one call?&nbsp;</li><li>Too much data&nbsp;</li><li>Too little data -&gt; many API calls?&nbsp;</li></ul><li>How about latency?&nbsp;</li><li>How about scalability to 1000s of clients?&nbsp;</li><li>How about load balancing?&nbsp;</li><li>How about inter operability with many languages?&nbsp;</li><li>How about authentication, monitoring, logging?&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "Don’t you wish you could leave the boring and hard stuff to the framework?&nbsp;"
+    },
+    {
+      "type": "text",
+      "data": "<b>What’s an API?&nbsp;</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>At its core, an API is a contract, saying:&nbsp;</li><ul><li>Send me this REQUEST (Client)</li><li>I’ll send you this RESPONSE (Server)</li></ul><li>It’s all about the data&nbsp;</li><li>The rest, we’ll leave to the gRPC framework.&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<b>What’s gRPC?</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>gRPC is a free and open-source framework developed by Google&nbsp;</li><li>gRPC is part of the Cloud Native Computation Foundation (CNCF) - like Docker &amp; Kubernetes for example&nbsp;</li><li>At a high level, it allows you to define REQUEST and RESPONSE for RPC (Remote Procedure Calls) and handles all the rest for you</li><li>On top of it, it’s modern, fast and efficient, build ohn top of HTTP/2, low latency, supports streaming, language independent, and makes it super easy to plug in authentication, load balancing, logging and monitoring.&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<b>What’s an RPC?&nbsp;</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>An RPC is a Remote Procedure Call.</li><li>In your CLIENT code, it looks like you’re just calling a function directly on the SERVER.&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<img src=\"quiver-image-url/5D02133CED50A382BACF5239E1084488.png\" alt=\"Screen Shot 2019-02-04 at 20.40.15.png\" width=\"723\" height=\"234\">"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>It’s not a new concept (CORBA had this before)</li><li>With gRPC, it’s implemented very cleanly and solves a lot of problems&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<img src=\"quiver-image-url/8077588AF46EBEC519CAD477DDBC9D1B.png\" alt=\"Screen Shot 2019-02-04 at 20.41.49.png\" width=\"442\" height=\"243\">"
+    },
+    {
+      "type": "text",
+      "data": "<b>How to get started?&nbsp;</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>At the core of gRPC, you need to define the messages and services using<b> Protocol Buffers</b></li><li>The rest of the gRPC code will be generated for you and you’ll have to provide an implementation for it.&nbsp;</li><li>One <b>.proto </b>file works for over 12 programming languages (server and client), and allows you to use a framework that scales to millions of RPC per seconds.&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<b>Why Protocol Buffers?</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>Protocol Buffers are language agnostic&nbsp;</li><li>Code can be generated for pretty much any language&nbsp;</li><li>Data is binary and efficiently serialized (small payloads)&nbsp;</li><li>Very convenient for transporting a lot of data&nbsp;</li><li>Protocol Buffers allows for easy API evolution using rules&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "You should know the basics of Protocol Buffers before starting this course"
+    },
+    {
+      "type": "text",
+      "data": "<b>Why should I learn it?&nbsp;</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>Many companies have embraced it fully in Production&nbsp;</li><ul><li>Google (internally and for Google Cloud services like Pub/Sub)</li><li>Netflix</li><li>Square (first contributor, replacement of all their APIs)</li><li>CoreOS (etcd 3 is built on gRPC for server-server communication)</li><li>Coackroach DB&nbsp;</li></ul><li>gRPC is the future of micro-services API and mobile-server API (and maybe Web APIs)</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<h3>Course Structure</h3>"
+    },
+    {
+      "type": "text",
+      "data": "<img src=\"quiver-image-url/867D6EB3F57DF44F9E25A10F23B1A2CC.png\" alt=\"Screen Shot 2019-02-05 at 17.55.50.png\" width=\"745\" height=\"292\">"
+    },
+    {
+      "type": "text",
+      "data": "<b>Course Objectives</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ol><li>Learn the gRPC theory to understand how gRPC works&nbsp;</li><li>Compare gRPC adn REST API paradigm&nbsp;</li><li>Write your gRPC service definition in .proto files&nbsp;</li><li>Generate Server &amp; Client Code&nbsp;</li><li>Implememnt Unary, Server Streaming, Client Streaming &amp; Bi-Directional Streaming API&nbsp;</li><li>Practice your learning with Exercises &amp; Solutions&nbsp;</li><li>Implement advanced concepts such as Error Handling, Deadlines &amp; SSL Security&nbsp;</li><li>Get pointers to expand your learning journey and get inspired by real world gRPC services&nbsp;</li></ol>"
+    },
+    {
+      "type": "text",
+      "data": "<h3>Pre-requisites&nbsp;</h3>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li>Good Understanding of the Programming Language for this course&nbsp;</li><li>Asynchronous programming is a plus&nbsp;</li><li>Good Understanding of Protocol Buffers (see my protocol buffers course to get started)</li><li>Lots of willingess to learn something new!</li><li><u>This course will be challenging</u></li></ul>"
+    },
+    {
+      "type": "text",
+      "data": "<b>Who is this course for?</b>"
+    },
+    {
+      "type": "text",
+      "data": "<ul><li><u>Developers</u> who want to understand how to write gRPC Services and Clients&nbsp;</li><li><u>Architects</u> who want to understand how gRPC works and the concepts behind the different types of API&nbsp;</li></ul>"
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": "&nbsp;"
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}
