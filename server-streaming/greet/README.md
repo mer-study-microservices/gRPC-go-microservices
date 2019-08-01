@@ -2,7 +2,7 @@
 
 ## GreetManyTimes API Definition 
 
-* It will take **`ONE`** `GreetManyTimesRequest` that ocntains a `Greeting`
+* It will take **`ONE`** `GreetManyTimesRequest` that contains a `Greeting`
 * It will return **`MANY`** `GreetManyTimesResponse` that contains a result string
 
 ## Generate `.proto` code

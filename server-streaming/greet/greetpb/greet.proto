@@ -25,7 +25,7 @@ message GreetManyTimesResponse {
 }
 
 service GreetService{
-    //Unary
+    // Unary
     rpc Greet(GreetRequest) returns (GreetResponse) {}; 
 
     // Server Streaming

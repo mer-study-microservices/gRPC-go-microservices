@@ -24,7 +24,7 @@ func (*server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.G
 }
 
 func main() {
-	fmt.Println("Hello World")
+	fmt.Println("Server starts...")
 	// 50051 is the default port for gRPC
 	lis, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {

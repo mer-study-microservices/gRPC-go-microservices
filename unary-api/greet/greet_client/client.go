@@ -12,7 +12,7 @@ import (
 func doUnary(c greetpb.GreetServiceClient) {
 
 	fmt.Println("Starting to do a Unary RPC...")
-	
+
 	req := &greetpb.GreetRequest{
 		Greeting: &greetpb.Greeting{
 			FirstName: "MerJQ",
@@ -31,7 +31,7 @@ func doUnary(c greetpb.GreetServiceClient) {
 func main() {
 
 	fmt.Println("Hello I'm a client")
-	
+
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("could not connect: %v", err)

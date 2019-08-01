@@ -5,6 +5,7 @@
 * [Setup](#setup)
 * [gRPC Unary](#grpc-unary)
 * [gRPC Server Streaming](#grpc-server-streaming)
+* [gRPC Client Streaming](#grpc-client-streaming)
 
 ## Setup
 * `setup`
@@ -14,3 +15,6 @@
 
 ## gRPC Server Streaming
 * `server-streaming`
+
+## gRPC Client Streaming
+* `client-streaming`
