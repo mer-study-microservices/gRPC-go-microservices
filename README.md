@@ -24,3 +24,7 @@
 
 ## gRPC Error Handling
 * `grpc-error`
+    * calculator
+        * codes.InvalidArgument
+    * greet
+        * deadlines
