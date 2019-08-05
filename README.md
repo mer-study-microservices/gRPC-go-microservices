@@ -18,3 +18,9 @@
 
 ## gRPC Client Streaming
 * `client-streaming`
+
+## gRPC Bi-Direction Streaming
+* `bidi-streaming`
+
+## gRPC Error Handling
+* `grpc-error`
